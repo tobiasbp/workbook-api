@@ -1,0 +1,9 @@
+workbook_api_test.conf
+
+*.pyc
+.cache
+
+# pypi
+build
+dist
+float_api.egg-info
