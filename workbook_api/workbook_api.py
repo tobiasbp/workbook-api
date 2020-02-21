@@ -69,6 +69,12 @@ class WorkbookAPI():
 
 
   def get_jobs(self, **kwargs):
+    '''
+    Params:
+      Status: Jobs returned must match these statii
+    '''
+    if 'Status' in kwargs:
+      assert isinstance(kwargs['Status'], list), "Status must be a list"
 
     path = '/jobs'
 
