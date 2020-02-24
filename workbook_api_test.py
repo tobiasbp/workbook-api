@@ -86,6 +86,13 @@ COSTUMER_KEYS = set({
   'UseFixedDebtorAddressOnPriceQuoteCreation'
   })
 
+DEPARTMENT_KEYS = set({
+  'CompanyId',
+  'Id',
+  'Name',
+  'ResponsibleId'
+  })
+
 JOB_KEYS = set({
   'AdjustmentHandlingExtExp',
   'AdjustmentHandlingExtExpCost',
@@ -169,6 +176,13 @@ def test_get_costumers():
   assert isinstance(costumers, list), "Costumers is a list"
   for c in costumers:
     assert COSTUMER_KEYS.issubset(c.keys()), "Costumer has all keys"
+
+
+def test_get_departments():
+  departments = api.get_departments()
+  assert isinstance(departments, list), "Departments is a list"
+  for d in departments:
+    assert DEPARTMENT_KEYS.issubset(d.keys()), "Department has all keys"
 
 
 def test_get_jobs():

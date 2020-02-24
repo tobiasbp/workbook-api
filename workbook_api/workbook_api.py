@@ -68,6 +68,16 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
+  def get_departments(self, **kwargs):
+    '''
+    Get a list of employees
+    '''
+
+    path = '/core/departments'
+
+    return self._get(path, params=kwargs)
+
+
   def get_employees(self, **kwargs):
     '''
     Get a list of employees
