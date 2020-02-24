@@ -68,6 +68,16 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
+  def get_employees(self, **kwargs):
+    '''
+    Get a list of employees
+    '''
+
+    path = '/resource/employees'
+
+    return self._get(path, params=kwargs)
+
+
   def get_jobs(self, **kwargs):
     '''
     Params:
@@ -81,12 +91,16 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
-  def get_employees(self, **kwargs):
+  def get_projects(self, **kwargs):
     '''
-    Get a list of employees
+    Get a list of projects.
+    Params:
+      customer_id: Projects for a single customer
     '''
 
-    path = '/resource/employees'
+    if 'customer_id' in kwargs:
+      path = '/resource/customer/' + str(customer_id) + '/projects' 
+    else:
+      path = '/projects'
 
     return self._get(path, params=kwargs)
-

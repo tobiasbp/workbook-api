@@ -30,3 +30,7 @@ def test_get_employees():
   employees = api.get_employees()
   assert isinstance(employees, list), "Employees is a list"
 
+
+def test_get_projects():
+  projects = api.get_projects()
+  assert isinstance(projects, list), "projects is a list"
