@@ -171,6 +171,48 @@ JOB_KEYS = set({
   'VoucherRegistrationAllowed'
   })
 
+EMPLOYEE_KEYS = set({
+  'Active',
+  'AllowCreateSkills',
+  'AllowCreateTags',
+  'AllowCreditorEdit',
+  'AllowDebtorEdit',
+  'AllowExpenseEntry',
+  'AllowFinanceAccountEdit',
+  'AllowSaveNewJobTemplates',
+  'AllowVATEdit',
+  'AllowVendorInvoiceQuickRegistration',
+  'CloseDownSystem',
+  'CompanyId',
+  'DefaultActivityId',
+  'DepartmentId',
+  'DisplayCurrencyId',
+  'DocumentFormatStandard',
+  'DriveRegistrationNumberRefund',
+  'EmailBodyFormatType',
+  'EmployeeName',
+  'EmployeePosition',
+  'EmploymentTypeId',
+  'ExternalCalenderSync',
+  #'ExternalCode',
+  'FlexDisabled',
+  #'FollowUpRefresh',
+  #'FullClientAccess',
+  'HireDate',
+  'Id',
+  'ManagerResourceId',
+  'NewbizzResourceAccess',
+  'PermanentlyDisabled',
+  'ReimbursementApproveManagerResourceId',
+  #'Sex',
+  'SubstituteEmployeeId',
+  'SystemLogOn',
+  'SystemSetting',
+  'TimeRegistration',
+  'TimeRegistrationReceiveMail',
+  'TimeSheetApproverResourceId'
+  })
+  
 def test_get_costumers():
   costumers = api.get_costumers()
   assert isinstance(costumers, list), "Costumers is a list"
@@ -195,6 +237,8 @@ def test_get_jobs():
 def test_get_employees():
   employees = api.get_employees()
   assert isinstance(employees, list), "Employees is a list"
+  for e in employees:
+    assert EMPLOYEE_KEYS.issubset(e.keys()), "Employee has all keys"
 
 
 def test_get_projects():
