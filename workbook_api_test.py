@@ -16,21 +16,20 @@ api = WorkbookAPI(
   )
 
 PROJECT_KEYS = set({
-  'ProjectRetainer',
   'Active',
+  'ColorId',
+  'Id',
+  'ProjectFolder',
   'ProjectName',
-  'ResourceId',
+  'ProjectNumber',
+  'ProjectRetainer',
   'ProjectRetainerAllowDeliveryJobToExceedMasterBudgetWhenClosed',
   'ProjectRetainerIsMixedRetainer',
-  'ProjectNumber',
-  'ResponsibleResourceId',
-  'Id',
-  'Active',
-  'ProjectFolder',
   'ProjectRetainerSummarizeActivityLines',
-  'ColorId'
-  #'UpdateResourceId',
+  'ResourceId'
+  #'ResponsibleResourceId',
   #'UpdateDate',
+  #'UpdateResourceId'
   })
 
 COSTUMER_KEYS = set({
@@ -87,6 +86,84 @@ COSTUMER_KEYS = set({
   'UseFixedDebtorAddressOnPriceQuoteCreation'
   })
 
+JOB_KEYS = set({
+  'AdjustmentHandlingExtExp',
+  'AdjustmentHandlingExtExpCost',
+  'AdjustmentHandlingExtraDiscount',
+  'AdjustmentHandlingMat',
+  'AdjustmentHandlingTime',
+  'AdminOnly',
+  'Billable',
+  'BillingExternalExpenseType',
+  'BillingMileageType',
+  'BillingTimeEntryTravelTimeType',
+  'CapitalizeSalesInvoice',
+  'CompDepId',
+  'CompanyCurrencyId',
+  'CompanyDepartmentId',
+  'CompanyId',
+  'CompletePhase',
+  'CreateDate',
+  'CreateEmpId',
+  'CreateEmployeeId',
+  #'CustGrpId',
+  'CustomerId',
+  'CustomerName',
+  'DoMakeWipAdjustment',
+  'EmployeeAccessType',
+  'EndDate',
+  'ExpAccMtd',
+  'ExpenseEntryAllowed',
+  'ExternalUserAccessType',
+  'FlexTimeRegDisabled',
+  'FolderArchived',
+  'FolderExtra',
+  'Id',
+  'IsMediaJob',
+  'JobAccessType',
+  'JobFolderArkiveret',
+  'JobFolderXtra',
+  'JobID',
+  'JobName',
+  'JobResponsibleId',
+  'JobRessAnsvarID',
+  'JobStart',
+  'JobStatusId',
+  'JobTaskActive',
+  'JobTaskUseAllDays',
+  'JobTypeId',
+  'JournalNumber',
+  'LeveringsDato',
+  'MaterialRegAllowed',
+  'MileageEntryAllowed',
+  #'PostDate',
+  'PostMethodExt',
+  'PostMethodMat',
+  'PostMethodTime',
+  'PostSpecId',
+  'PricelistID',
+  'ProjectId',
+  'ProjectRetainerDeliveryJob',
+  'ProjectRetainerMasterJob',
+  'Public',
+  'PurchaseOrderAllowed',
+  'ResponsibleId',
+  'RetainerJob',
+  'StartDate',
+  'StatusId',
+  'SubsistenceAllowanceAllowed',
+  'SuppTxtRequested',
+  'SupplementaryTextRequested',
+  'SupportTicketEnable',
+  'TeamID',
+  'TeamId',
+  'TemplateJob',
+  'TimeAndMaterial',
+  'TimeEntryAllowed',
+  'TimeRegAllow',
+  'VoucherRegistrationAllowed'
+  })
+
 def test_get_costumers():
   costumers = api.get_costumers()
   assert isinstance(costumers, list), "Costumers is a list"
@@ -97,6 +174,8 @@ def test_get_costumers():
 def test_get_jobs():
   jobs = api.get_jobs()
   assert isinstance(jobs, list), "Jobs is a list"
+  for j in jobs:
+    assert JOB_KEYS.issubset(j.keys()), "job has all keys"
 
 
 def test_get_employees():
