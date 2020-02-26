@@ -212,7 +212,42 @@ EMPLOYEE_KEYS = set({
   'TimeRegistrationReceiveMail',
   'TimeSheetApproverResourceId'
   })
-  
+
+RESOURCE_KEYS = set({
+  'Active',
+  'AllowBulkEmail',
+  'AllowEmail',
+  'AllowMail',
+  'AllowPhone',
+  'AllowSendMarketing',
+  'AllowSms',
+  #'ApplicationAccessRoleId',
+  'CalendarShowExternalInTaskList',
+  #'CreateByResourceId',
+  #'CreateDate',
+  #'Email',
+  'Id',
+  'Initials',
+  #'InterfaceLCID',
+  'IsLeadSource',
+  'IsPartner',
+  'LDAPLogin',
+  'Name',
+  #'ParentResourceId',
+  'ReleaseState',
+  #'ReportLCID',
+  'ResourceBookable',
+  'ResourceFolder',
+  'TimeEntryShowOnLogin',
+  'TypeId',
+  'UpdateDate',
+  'UpdatedByResourceId',
+  'UsedAsSupplier',
+  'UserAccess',
+  #'UserLogin'
+  })
+
+
 def test_get_costumers():
   costumers = api.get_costumers()
   assert isinstance(costumers, list), "Costumers is a list"
@@ -246,4 +281,11 @@ def test_get_projects():
   assert isinstance(projects, list), "projects is a list"
   for p in projects:
     assert PROJECT_KEYS.issubset(p.keys()), "Project has all keys"
+
+
+def test_get_resources():
+  resources = api.get_resources()
+  assert isinstance(resources, list), "Resources is a list"
+  for r in resources:
+    assert RESOURCE_KEYS.issubset(r.keys()), "Resource has all keys"
 

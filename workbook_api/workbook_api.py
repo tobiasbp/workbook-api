@@ -114,3 +114,12 @@ class WorkbookAPI():
       path = '/projects'
 
     return self._get(path, params=kwargs)
+
+  def get_resources(self, **kwargs):
+    '''
+    Get at list of resources (People)
+    '''
+
+    path = '/resources'
+
+    return self._get(path, params=kwargs)
