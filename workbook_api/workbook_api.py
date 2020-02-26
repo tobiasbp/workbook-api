@@ -70,7 +70,7 @@ class WorkbookAPI():
 
   def get_departments(self, **kwargs):
     '''
-    Get a list of employees
+    Get a list of departments
     '''
 
     path = '/core/departments'
@@ -121,5 +121,15 @@ class WorkbookAPI():
     '''
 
     path = '/resources'
+
+    return self._get(path, params=kwargs)
+
+
+  def get_expense_entries(self, **kwargs):
+    '''
+    Get at list of price quotes
+    '''
+
+    path = '/personalexpense/expenseentries'
 
     return self._get(path, params=kwargs)

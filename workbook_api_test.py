@@ -247,6 +247,34 @@ RESOURCE_KEYS = set({
   #'UserLogin'
   })
 
+EXPENSE_ENTRY_KEYS = set([
+  'ApprovalStatus',
+  'CompanyId',
+  'CreditorId',
+  'CurrencyAmount',
+  'CurrencyId',
+  'Description',
+  'ExpenseEntryTypeId',
+  'Id',
+  'IsApproved',
+  'LocationId',
+  #'ReceiptFile',
+  'ResourceId',
+  'TaxManualEdited',
+  #'UpdateDate',
+  #'UpdateResId',
+  #'VoucherCompanyId',
+  'VoucherDate',
+  #'VoucherNumber'
+  ])
+
+
+def test_get_expense_entries():
+  expense_entries = api.get_expense_entries()
+  assert isinstance(expense_entries, list), "Expense entries is a list"
+  for e in expense_entries:
+    assert EXPENSE_ENTRY_KEYS.issubset(e.keys()), "Expense entry has all keys"
+
 
 def test_get_costumers():
   costumers = api.get_costumers()
