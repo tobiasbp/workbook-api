@@ -286,17 +286,6 @@ EMPLOYEE_PRICES_HOUR_KEYS = set({
   })
 
 
-def test_employee_prices_hour():
-  # A random employee
-  employee = random.choice(api.get_employees())
-  # Get employee prices hours for employee
-  employee_prices_hour = api.get_employee_prices_hour(Id=employee['Id'])
-  # Must be a dict
-  assert isinstance(employee_prices_hour, dict), "Employee prices hour entries is a list"
-  # Must have keys
-  assert EMPLOYEE_PRICES_HOUR_KEYS.issubset(employee_prices_hour.keys()), "Employee prices hour has all keys"
-
-
 def test_get_employee_price_groups():
   employee_price_groups = api.get_employee_price_groups()
   assert isinstance(employee_price_groups, list), "Employee price groups entries is a list"
@@ -338,6 +327,17 @@ def test_get_employees():
   for e in employees:
     assert EMPLOYEE_KEYS.issubset(e.keys()), "Employee has all keys"
 
+def test_get_employee():
+  # Get a random employee
+  e1 = random.choice(api.get_employees())
+  assert isinstance(e1, dict), "Random employee is a dict"
+  assert EMPLOYEE_KEYS.issubset(e1.keys()), "Random employee has all keys"
+  # Use Id of random employee to look up a single employee
+  e2 = api.get_employee(Id=e1['Id'])
+  assert isinstance(e2, dict), "Employee is a dict"
+  assert EMPLOYEE_KEYS.issubset(e2.keys()), "Single employee has all keys"
+  assert e1 == e2, "Employees are identical"
+
 
 def test_get_projects():
   projects = api.get_projects()
@@ -351,4 +351,16 @@ def test_get_resources():
   assert isinstance(resources, list), "Resources is a list"
   for r in resources:
     assert RESOURCE_KEYS.issubset(r.keys()), "Resource has all keys"
+
+
+def test_get_resource():
+  # Get a random resource
+  r1 = random.choice(api.get_resources())
+  assert isinstance(r1, dict), "Random resource is a dict"
+  assert RESOURCE_KEYS.issubset(r1.keys()), "Random resource has all keys"
+  # Use Id of random resource to look up a single resource
+  r2 = api.get_resource(Id=r1['Id'])
+  assert isinstance(r2, dict), "Resource is a dict"
+  assert RESOURCE_KEYS.issubset(r2.keys()), "Single resource has all keys"
+  assert r1 == r2, "Resources are identical"
 

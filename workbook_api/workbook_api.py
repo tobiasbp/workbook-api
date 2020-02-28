@@ -88,6 +88,17 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
+  def get_employee(self, **kwargs):
+    '''
+    Get a single employee
+    '''
+    assert 'Id' in kwargs.keys()
+
+    path = '/resource/employee/{}'.format(kwargs['Id'])
+
+    return self._get(path, params=kwargs)
+
+
   def get_jobs(self, **kwargs):
     '''
     Params:
@@ -121,6 +132,17 @@ class WorkbookAPI():
     '''
 
     path = '/resources'
+
+    return self._get(path, params=kwargs)
+
+
+  def get_resource(self, **kwargs):
+    '''
+    Get a single resource
+    '''
+    assert 'Id' in kwargs.keys()
+
+    path = '/resource/{}'.format(kwargs['Id'])
 
     return self._get(path, params=kwargs)
 
