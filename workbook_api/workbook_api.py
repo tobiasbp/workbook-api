@@ -133,3 +133,25 @@ class WorkbookAPI():
     path = '/personalexpense/expenseentries'
 
     return self._get(path, params=kwargs)
+
+
+  def get_employee_price_groups(self, **kwargs):
+    '''
+    Get at list of employee price groups
+    '''
+
+    path = '/settings/employee/pricegroups'
+
+    return self._get(path, params=kwargs)
+
+
+  def get_employee_prices_hour(self, **kwargs):
+    '''
+    Get at list of employee prices hour
+    '''
+
+    assert 'Id' in kwargs
+
+    path = '/settings/employee/priceshour/current'
+
+    return self._get(path, params=kwargs)

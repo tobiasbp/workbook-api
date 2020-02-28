@@ -1,4 +1,5 @@
 import configparser
+import random
 
 from workbook_api import WorkbookAPI
 
@@ -251,22 +252,56 @@ EXPENSE_ENTRY_KEYS = set([
   'ApprovalStatus',
   'CompanyId',
   'CreditorId',
-  'CurrencyAmount',
+  #'CurrencyAmount',
   'CurrencyId',
-  'Description',
+  #'Description',
   'ExpenseEntryTypeId',
   'Id',
   'IsApproved',
   'LocationId',
   #'ReceiptFile',
   'ResourceId',
-  'TaxManualEdited',
-  #'UpdateDate',
-  #'UpdateResId',
+  #'TaxManualEdited',
+  'UpdateDate',
+  'UpdateResId',
   #'VoucherCompanyId',
-  'VoucherDate',
+  #'VoucherDate',
   #'VoucherNumber'
   ])
+
+EMPLOYEE_PRICE_GROUPS_KEYS = set({
+  'Active',
+  'Id',
+  'PriceGroupName'
+  })
+
+EMPLOYEE_PRICES_HOUR_KEYS = set({
+  'Id',
+  'EmployeeId',
+  #'CurrencyId'
+  #'HoursCost',
+  #'HoursSale',
+  #'ICSale',
+  'Profit'
+  })
+
+
+def test_employee_prices_hour():
+  # A random employee
+  employee = random.choice(api.get_employees())
+  # Get employee prices hours for employee
+  employee_prices_hour = api.get_employee_prices_hour(Id=employee['Id'])
+  # Must be a dict
+  assert isinstance(employee_prices_hour, dict), "Employee prices hour entries is a list"
+  # Must have keys
+  assert EMPLOYEE_PRICES_HOUR_KEYS.issubset(employee_prices_hour.keys()), "Employee prices hour has all keys"
+
+
+def test_get_employee_price_groups():
+  employee_price_groups = api.get_employee_price_groups()
+  assert isinstance(employee_price_groups, list), "Employee price groups entries is a list"
+  for e in employee_price_groups:
+    assert EMPLOYEE_PRICE_GROUPS_KEYS.issubset(e.keys()), "Employee price groups entry has all keys"
 
 
 def test_get_expense_entries():
