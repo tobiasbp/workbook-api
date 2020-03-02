@@ -112,6 +112,17 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
+  def get_job(self, **kwargs):
+    '''
+    Get a single job
+    '''
+    assert 'Id' in kwargs.keys()
+
+    path = '/job/{}'.format(kwargs['Id'])
+
+    return self._get(path, params=kwargs)
+
+
   def get_projects(self, **kwargs):
     '''
     Get a list of projects.
@@ -125,6 +136,7 @@ class WorkbookAPI():
       path = '/projects'
 
     return self._get(path, params=kwargs)
+
 
   def get_resources(self, **kwargs):
     '''

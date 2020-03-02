@@ -321,11 +321,24 @@ def test_get_jobs():
     assert JOB_KEYS.issubset(j.keys()), "job has all keys"
 
 
+def test_get_job():
+  # Get random job
+  j1 = random.choice(api.get_jobs())
+  assert isinstance(j1, dict), "Random job is a dict"
+  assert JOB_KEYS.issubset(j1.keys()), "Random job has all keys"
+  # Use Id of random job to look up a single job
+  j2 = api.get_job(Id=j1['Id'])
+  assert isinstance(j2, dict), "Job is a dict"
+  assert JOB_KEYS.issubset(j2.keys()), "Single job has all keys"
+  assert j1 == j2, "Jobs are identical"
+
+
 def test_get_employees():
   employees = api.get_employees()
   assert isinstance(employees, list), "Employees is a list"
   for e in employees:
     assert EMPLOYEE_KEYS.issubset(e.keys()), "Employee has all keys"
+
 
 def test_get_employee():
   # Get a random employee
