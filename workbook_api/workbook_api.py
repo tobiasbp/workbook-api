@@ -91,15 +91,19 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
-  def get_currencies(self, **kwargs):
+  def get_currencies(self, reporting_currency=True, including_blocked=False):
     '''
     Get a list of currencies
     Implements: CurrenciesRequest
     '''
+    params = {
+      "ReportingCurrency": reporting_currency,
+      "IncludingBlocked": including_blocked
+      }
 
     path = '/core/currencies'
 
-    return self._get(path, params=kwargs)
+    return self._get(path, params=params)
 
 
   def get_departments(self, **kwargs):
