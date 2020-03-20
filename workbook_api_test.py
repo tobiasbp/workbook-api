@@ -94,6 +94,50 @@ DEPARTMENT_KEYS = set({
   'ResponsibleId'
   })
 
+DEBTOR_KEYS = set({
+  'AccountNumber',
+  'AccountType',
+  #'Address1',
+  #'Address2',
+  'AllowCombinedPayment',
+  'Blocked',
+  #'City',
+  'CompanyId',
+  #'ContactName',
+  'CountryId',
+  'CreateEmployeeId',
+  'CreditorAllowedZeroPricefactor',
+  'CreditorSendRemittanceAdvice',
+  'CurrencyID',
+  'DebtorPaymentMethodId',
+  'DebtorPaymentTermId',
+  'DebtorVATId',
+  'DeliveryDebtorOnly',
+  #'EAN',
+  #'Email',
+  'EmployeeCreditor',
+  'ExpenseEntryVoucherCurrencyMethod',
+  'Id',
+  'Internal',
+  'LanguageId',
+  'Name',
+  'PayPropDisabled',
+  'PayPropOmitCreditNote',
+  'PayPropSkipAllIfCreditNote',
+  'PayPropSkipAllIfDebitAmount',
+  #'PhoneNumber',
+  'PostingGroupId',
+  'PrintStatement',
+  'PublicRegNoCheck',
+  'PublicRegNoCheckType',
+  #'PublicRegistrationNumber',
+  #'ReportingGroupId',
+  'RequestStatus',
+  'UpdateResourceId',
+  'UseReminderHandling',
+  #'ZipCode'
+  })
+
 JOB_KEYS = set({
   'AdjustmentHandlingExtExp',
   'AdjustmentHandlingExtExpCost',
@@ -245,10 +289,10 @@ RESOURCE_KEYS = set({
   'LDAPLogin',
   'Name',
   #'ParentResourceId',
-  'ReleaseState',
+  #'ReleaseState',
   #'ReportLCID',
   'ResourceBookable',
-  'ResourceFolder',
+  #'ResourceFolder',
   'TimeEntryShowOnLogin',
   'TypeId',
   'UpdateDate',
@@ -325,6 +369,12 @@ def test_get_departments():
     assert DEPARTMENT_KEYS.issubset(d.keys()), "Department has all keys"
 
 
+def test_get_debtors():
+  debtors = api.get_debtors()
+  assert isinstance(debtors, list), "Debtors is a list"
+  for d in debtors:
+    assert DEBTOR_KEYS.issubset(d.keys()), "Debtor has all keys"
+
 def test_get_jobs():
   jobs = api.get_jobs()
   assert isinstance(jobs, list), "Jobs is a list"
@@ -378,8 +428,9 @@ def test_get_projects():
 def test_get_resources():
   resources = api.get_resources()
   assert isinstance(resources, list), "Resources is a list"
-  #for r in resources:
-  #  assert RESOURCE_KEYS.issubset(r.keys()), "Resource has all keys"
+  for r in resources:
+    #print(RESOURCE_KEYS - r.keys())
+    assert RESOURCE_KEYS.issubset(r.keys()), "Resource has all keys"
 
 
 def test_get_resource():

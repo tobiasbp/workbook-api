@@ -78,6 +78,20 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
+  def get_debtors(self, **kwargs):
+    '''
+    Get a list of debtors
+    Params:
+      CompanyId: Int
+      Blocked: Bool
+      HasOutstandingAmount: Bool
+    '''
+
+    path = '/finance/debtors'
+
+    return self._get(path, params=kwargs)
+
+
   def get_employees(self, **kwargs):
     '''
     Get a list of employees
@@ -111,6 +125,7 @@ class WorkbookAPI():
 
     return self._get(path, params=kwargs)
 
+
   def get_job_types(self, **kwargs):
     '''
     Params:
@@ -126,7 +141,6 @@ class WorkbookAPI():
     path = '/settings/job/types'
 
     return self._get(path, params=kwargs)
-
 
 
   def get_job(self, **kwargs):
