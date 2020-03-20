@@ -68,6 +68,17 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
+  def get_companies(self, active=True):
+    '''
+    Get a list of companies
+    Params: active
+    '''
+
+    path = '/core/resourcecompany'
+
+    return self._get(path, params={'Active': active})
+
+
   def get_departments(self, **kwargs):
     '''
     Get a list of departments
@@ -92,6 +103,20 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
+  def get_debtors_balance(self, **kwargs):
+    '''
+    Get balance for debtors
+    Params:
+      CompanyId: Int
+      Blocked: Bool
+    '''
+
+    path = '/finance/debtors/visualization/balance'
+
+    #return self._get(path, params=kwargs)
+    return []
+
+
   def get_employees(self, **kwargs):
     '''
     Get a list of employees
@@ -111,6 +136,17 @@ class WorkbookAPI():
     path = '/resource/employee/{}'.format(kwargs['Id'])
 
     return self._get(path, params=kwargs)
+
+
+  def get_invoices(self, job_id):
+    '''
+    Get a list of invoices for job_id
+    '''
+
+    path = "/job/{}/invoices".format(job_id)
+
+    #return self._get(path, {})
+    return []
 
 
   def get_jobs(self, **kwargs):

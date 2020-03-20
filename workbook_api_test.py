@@ -33,6 +33,12 @@ PROJECT_KEYS = set({
   #'UpdateResourceId'
   })
 
+COMPANY_KEYS =set({
+  'Active',
+  'Id',
+  'Name'
+  })
+
 COSTUMER_KEYS = set({
   'Active',
   'ActivityGrouping',
@@ -353,6 +359,13 @@ def test_get_expense_entries():
   assert isinstance(expense_entries, list), "Expense entries is a list"
   for e in expense_entries:
     assert EXPENSE_ENTRY_KEYS.issubset(e.keys()), "Expense entry has all keys"
+
+
+def test_get_companies():
+  companies = api.get_companies()
+  assert isinstance(companies, list), "Companies is a list"
+  for c in companies:
+    assert COMPANY_KEYS.issubset(c.keys()), "Company has all keys"
 
 
 def test_get_costumers():
