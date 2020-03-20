@@ -89,7 +89,8 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
-  def get_debtors(self, **kwargs):
+  #def get_debtors(self, **kwargs):
+  def get_debtors(self, company_id=None, blocked=False, has_outstanding_amount=True):
     '''
     Get a list of debtors
     Params:
@@ -98,9 +99,15 @@ class WorkbookAPI():
       HasOutstandingAmount: Bool
     '''
 
+    params = {
+      'CompanyId': company_id,
+      'Blocked': blocked,
+      'HasOutstandingAmount': has_outstanding_amount
+      }
+
     path = '/finance/debtors'
 
-    return self._get(path, params=kwargs)
+    return self._get(path, params=params)
 
 
   def get_debtors_balance(self, **kwargs):
