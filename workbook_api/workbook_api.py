@@ -296,14 +296,18 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
-  def get_employee_price_groups(self, **kwargs):
+  def get_employee_price_groups(self, show_inactive=False):
     '''
     Get at list of employee price groups
+    Implements: EmployeePriceGroupsRequest
     '''
+    params = {
+      'ShowInactive': show_inactive
+      }
 
     path = '/settings/employee/pricegroups'
 
-    return self._get(path, params=kwargs)
+    return self._get(path, params=params)
 
 
   def get_employee_prices_hour(self):
