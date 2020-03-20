@@ -193,6 +193,17 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
+  def get_employee_positions(self):
+    '''
+    Get a employee positions
+    Implements: EmployeePositionsRequest
+    '''
+
+    path = '/resource/employee/positions'
+
+    return self._get(path, params={})
+
+
   def get_invoices(self, status=[], job_id=None, customer_id=None):
     '''
     Get a list of invoices for job_id

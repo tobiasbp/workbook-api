@@ -295,6 +295,16 @@ EMPLOYEE_KEYS = set({
   'TimeSheetApproverResourceId'
   })
 
+EMPLOYEE_POSITION_KEYS = set({
+  "Id",
+  "Title",
+  #"Description",
+  #"CapacityPlanEmployeeId",
+  "UpdateResourceId",
+  "Update",
+  "UpdateType"
+  })
+
 RESOURCE_KEYS = set({
   'Active',
   'AllowBulkEmail',
@@ -533,6 +543,13 @@ def test_get_employee_price_groups():
   for e in employee_price_groups:
     assert EMPLOYEE_PRICE_GROUPS_KEYS.issubset(e.keys()), "Employee price groups entry has all keys"
 
+def test_get_employee_positions():
+  employee_positions = api.get_employee_positions()
+  assert isinstance(employee_positions, list), "Employee positions is a list"
+  for p in employee_positions:
+    print(EMPLOYEE_POSITION_KEYS - p.keys())
+    assert EMPLOYEE_POSITION_KEYS.issubset(p.keys()), "Employee positions entry has all keys"
+
 
 def test_get_expense_entries():
   expense_entries = api.get_expense_entries()
@@ -584,10 +601,9 @@ def test_get_debtors():
 
 
 def test_get_debtors_balance():
-  debtors = api.get_debtors_balance()
+  debtors = api.get_debtors_balance(company_id=1)
   assert isinstance(debtors, list), "Debtors balance is a list"
   for d in debtors:
-    print(DEBTOR_BALANCE_KEYS - d.keys())
     assert DEBTOR_BALANCE_KEYS.issubset(d.keys()), "Debtor balance has all keys"
 
 
