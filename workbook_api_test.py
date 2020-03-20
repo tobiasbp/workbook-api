@@ -413,6 +413,47 @@ INVOICE_TYPE_KEYS = set({
   })
 
 CREDITOR_KEYS = set({
+  'AccountId',
+  'AccountNumber',
+  'AccountType',
+  #'Address1',
+  'AllowCombinedPayment',
+  'Blocked',
+  #'City',
+  'CompanyId',
+  #'CountryId',
+  #'CountryStateId',
+  #'CreditorActivityId',
+  'CreditorAllowedZeroPricefactor',
+  'CreditorIsEmployee',
+  'CreditorOffAccountAuto',
+  #'CurrencyId',
+  'DeliveryDebtorOnly',
+  'ExpenseEntryVoucherCurrencyMethod',
+  'Id',
+  'Internal',
+  'IsMiscAccount',
+  'Name',
+  #'PayGroupId',
+  'PayMethodId',
+  'PayModeId',
+  'PayPropDisabled',
+  'PayPropOmitCreditNote',
+  'PayPropSkipAllIfCreditNote',
+  'PayPropSkipAllIfDebitAmount',
+  'PrintStatement',
+  'PublicRegistrationNumberCheckType',
+  #'RemainingAmountDue',
+  #'RemainingAmountTotal',
+  #'SupplierResourceID',
+  #'UpdateResourceId',
+  'UseReminderHandling'
+  })
+
+
+
+
+CREDITOR_KEYS_OLD = set({
   'AccountNumber',
   'AccountType',
   #'Address1',

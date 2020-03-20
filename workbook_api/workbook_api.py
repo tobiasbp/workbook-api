@@ -82,10 +82,11 @@ class WorkbookAPI():
   def get_creditors(self, **kwargs):
     '''
     Get a list of companies
-    Params: active
+    Implements: CreditorListsRequest
     '''
 
-    path = '/finance/accounts/creditors'
+    #path = '/finance/accounts/creditors'
+    path = '/finance/account/visualization/creditors'
 
     return self._get(path, params=kwargs)
 
