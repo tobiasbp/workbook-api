@@ -111,6 +111,23 @@ class WorkbookAPI():
 
     return self._get(path, params=kwargs)
 
+  def get_job_types(self, **kwargs):
+    '''
+    Params:
+      Active (Bool): Filter on active/inactive jobs 
+      CompanyId (Int): ID of company to get job types for
+    '''
+    if 'Active' in kwargs:
+      assert isinstance(kwargs['Active'], bool), "Active must be a bool"
+
+    if 'CompanyId' in kwargs:
+      assert isinstance(kwargs['CompanyId'], bool), "CompanyId must be an int"
+
+    path = '/settings/job/types'
+
+    return self._get(path, params=kwargs)
+
+
 
   def get_job(self, **kwargs):
     '''
@@ -141,6 +158,9 @@ class WorkbookAPI():
   def get_resources(self, **kwargs):
     '''
     Get at list of resources (People)
+    TypeID:
+      2 = Employee
+      10 = Contact
     '''
 
     path = '/resources'
