@@ -53,6 +53,19 @@ class WorkbookAPI():
     return r.json()
 
 
+  def get_budgets(self, active=True):
+    '''
+    Get a list of budgets
+    Implements: FinanceBudgetsRequest
+    Params: active
+    '''
+    # FIXME: Untested
+    path = '/finance/budgets'
+
+    return self._get(path, params={})
+
+
+
   def get_costumers(self, costumer_id=None, **kwargs):
     '''
     Returns a single costumer if costumer_id is set.
@@ -124,6 +137,9 @@ class WorkbookAPI():
       Blocked: Bool
       HasOutstandingAmount: Bool
     '''
+    # With this I get RemainingTotalAmount: CustomerDebtorsVisualizationRequest
+    # /resource/customer/{CustomerId}/visualization/debtors/balance
+    # But then I need the customerID
 
     params = {
       'CompanyId': company_id,
@@ -132,22 +148,28 @@ class WorkbookAPI():
       }
 
     path = '/finance/debtors'
+    #path = '/finance/account/visualization/debtors'
 
     return self._get(path, params=params)
 
 
-  def get_debtors_balance(self, **kwargs):
+  def get_debtors_balance(self, company_id, blocked=False):
     '''
     Get balance for debtors
+    Implements: DebtorsBalenceRequest
     Params:
       CompanyId: Int
       Blocked: Bool
     '''
 
+    params = {
+      'CompanyId': company_id,
+      'Blocked': blocked
+    }
+
     path = '/finance/debtors/visualization/balance'
 
-    #return self._get(path, params=kwargs)
-    return []
+    return self._get(path, params=params)
 
 
   def get_employees(self, **kwargs):

@@ -100,6 +100,27 @@ DEPARTMENT_KEYS = set({
   'ResponsibleId'
   })
 
+DEBTOR_BALANCE_KEYS = set({
+  "Id",
+  "ArpAccountNumber",
+  "ArpAccountName",
+  "ArpGroupTitle",
+  #"AccountContact",
+  #"AccountContactTel",
+  #"RemainingAmountTotal",
+  #"RemainingAmountDue",
+  "CompanyId",
+  "ArpAccountType",
+  "Blocked",
+  "ArpAccountGrpId",
+  #"Email",
+  "CurrencyId",
+  "Employee",
+  "RequestStatus",
+  #"RequestRejectComment",
+  "HasOpenEliminationItems"
+  })
+
 DEBTOR_KEYS = set({
   'AccountNumber',
   'AccountType',
@@ -545,7 +566,6 @@ def test_get_currencies():
   currencies = api.get_currencies()
   assert isinstance(currencies, list), "Currencies is a list"
   for c in currencies:
-    print(CURRENCY_KEYS - c.keys())
     assert CURRENCY_KEYS.issubset(c.keys()), "Currency has all keys"
 
 
@@ -561,6 +581,14 @@ def test_get_debtors():
   assert isinstance(debtors, list), "Debtors is a list"
   for d in debtors:
     assert DEBTOR_KEYS.issubset(d.keys()), "Debtor has all keys"
+
+
+def test_get_debtors_balance():
+  debtors = api.get_debtors_balance()
+  assert isinstance(debtors, list), "Debtors balance is a list"
+  for d in debtors:
+    print(DEBTOR_BALANCE_KEYS - d.keys())
+    assert DEBTOR_BALANCE_KEYS.issubset(d.keys()), "Debtor balance has all keys"
 
 
 def test_get_invoices():
