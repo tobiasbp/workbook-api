@@ -91,6 +91,17 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
+  def get_currencies(self, **kwargs):
+    '''
+    Get a list of currencies
+    Implements: CurrenciesRequest
+    '''
+
+    path = '/core/currencies'
+
+    return self._get(path, params=kwargs)
+
+
   def get_departments(self, **kwargs):
     '''
     Get a list of departments

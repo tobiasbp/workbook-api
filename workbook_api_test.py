@@ -450,8 +450,14 @@ CREDITOR_KEYS = set({
   'UseReminderHandling'
   })
 
-
-
+CURRENCY_KEYS = set({
+  'Blocked',
+  'Id',
+  'Iso4127',
+  'IsoCode',
+  'Name',
+  'ReportingCurrency'
+  })
 
 CREDITOR_KEYS_OLD = set({
   'AccountNumber',
@@ -532,8 +538,15 @@ def test_get_creditors():
   creditors = api.get_creditors()
   assert isinstance(creditors, list), "Creditors is a list"
   for c in creditors:
-    print(CREDITOR_KEYS - c.keys())
     assert CREDITOR_KEYS.issubset(c.keys()), "Creditor has all keys"
+
+
+def test_get_currencies():
+  currencies = api.get_currencies()
+  assert isinstance(currencies, list), "Currencies is a list"
+  for c in currencies:
+    print(CURRENCY_KEYS - c.keys())
+    assert CURRENCY_KEYS.issubset(c.keys()), "Currency has all keys"
 
 
 def test_get_departments():
