@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="workbook-api",
-    version="0.0.6",
+    version="0.0.7",
     author="Tobias Balle-Petersen",
     author_email="tobiasbp@gmail.com",
     license="MIT",
