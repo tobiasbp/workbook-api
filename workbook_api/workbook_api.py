@@ -138,15 +138,39 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
-  def get_invoices(self, job_id):
+  def get_invoices(self, status=[], job_id=None, customer_id=None):
     '''
     Get a list of invoices for job_id
+    Params:
+      status: List of status IDs
     '''
 
-    path = "/job/{}/invoices".format(job_id)
+    # If int supplied, put it into a list
+    if type(status) == int:
+      status = [status]
 
-    #return self._get(path, {})
-    return []
+    params = {
+      'Status': status,
+      'JobId': job_id,
+      'CustomerId': customer_id
+      }
+
+    # Status must be a list
+    assert isinstance(status, list), "status must be a list in get invoices()"
+
+    path = "/job/invoices"
+
+    return self._get(path, params)
+
+
+  def get_invoice_types(self, **kwargs):
+    '''
+    Get invoice types
+    '''
+
+    path = '/job/invoice/virtualization/types'
+
+    return self._get(path, params=kwargs)
 
 
   def get_jobs(self, **kwargs):

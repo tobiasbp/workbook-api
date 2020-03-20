@@ -345,6 +345,72 @@ EMPLOYEE_PRICES_HOUR_KEYS = set({
   'ValidFrom'
   })
 
+INVOICE_KEYS = set({
+  #'AmountNet',
+  #'AmountNetCurrency',
+  #'AmountTot',
+  #'AmountTotalCurrency',
+  #'AmountVat',
+  #'AmountVatCurrency',
+  #'Comment',
+  'CreditNoteCloseJob',
+  'CurrencyDate',
+  'CurrencyId',
+  'CurrencyRate',
+  'Date',
+  'DebtorId',
+  'DebtorLabel',
+  'DoIndentLines',
+  'DoNotCapitalize',
+  #'DueDate',
+  'EliminatePartInvoice',
+  'Headline',
+  'Id',
+  'IncludeVouchers',
+  'Internal',
+  #'InternalComment',
+  'JobId',
+  'JournalNumber',
+  'LanguageId',
+  'MainInvoice',
+  #'Number',
+  #'NumberNumeric',
+  'PartialInvoiceExpPostIsApproved',
+  'PayModeId',
+  'PayTermId',
+  'PayTermText',
+  'PaymentStatusForSystemsWithoutFinance',
+  #'PostDate',
+  #'PrintDate',
+  #'PrintResourceId',
+  'ReportLayoutId',
+  'ReportWatermarkId',
+  'ResponsibleResourceId',
+  'ReverseCharge',
+  'ShowCurrency',
+  'ShowDecimals',
+  'ShowDividingLines',
+  'ShowLineHours',
+  'ShowLineHoursPrice',
+  'ShowLinePrice',
+  'ShowLines',
+  'ShowPartInvoiceExpenseDetails',
+  'ShowPhaseNumber',
+  'ShowPhasePrice',
+  'ShowPhases',
+  'ShowVATPercent',
+  'Status',
+  'SubInvoice',
+  'Title',
+  'TypeId',
+  'UseActGrouping',
+  #'VATPercent'
+  })
+
+INVOICE_TYPE_KEYS = set({
+  'Description',
+  'Id'
+  })
 
 #FIXME: Test limited searches
 
@@ -388,6 +454,23 @@ def test_get_debtors():
   assert isinstance(debtors, list), "Debtors is a list"
   for d in debtors:
     assert DEBTOR_KEYS.issubset(d.keys()), "Debtor has all keys"
+
+
+def test_get_invoices():
+  invoices = api.get_invoices()
+  assert isinstance(invoices, list), "Invoices is a list"
+  for i in invoices:
+    print(INVOICE_KEYS - i.keys())
+    assert INVOICE_KEYS.issubset(i.keys()), "Invoice has all keys"
+
+
+def test_get_invoice_type():
+  invoice_types = api.get_invoice_types()
+  assert isinstance(invoice_types, list), "Invoice types is a list"
+  for i in invoice_types:
+    print(INVOICE_TYPE_KEYS - i.keys())
+    assert INVOICE_TYPE_KEYS.issubset(i.keys()), "Invoice type has all keys"
+
 
 def test_get_jobs():
   jobs = api.get_jobs()
@@ -443,7 +526,6 @@ def test_get_resources():
   resources = api.get_resources()
   assert isinstance(resources, list), "Resources is a list"
   for r in resources:
-    #print(RESOURCE_KEYS - r.keys())
     assert RESOURCE_KEYS.issubset(r.keys()), "Resource has all keys"
 
 
