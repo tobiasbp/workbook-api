@@ -336,14 +336,15 @@ EMPLOYEE_PRICE_GROUPS_KEYS = set({
   })
 
 EMPLOYEE_PRICES_HOUR_KEYS = set({
-  'Id',
+  'CurrencyId',
   'EmployeeId',
-  #'CurrencyId'
   #'HoursCost',
-  #'HoursSale',
-  #'ICSale',
-  'Profit'
+  'HoursSale',
+  'Id',
+  'Profit',
+  'ValidFrom'
   })
+
 
 #FIXME: Test limited searches
 
@@ -444,6 +445,14 @@ def test_get_resources():
   for r in resources:
     #print(RESOURCE_KEYS - r.keys())
     assert RESOURCE_KEYS.issubset(r.keys()), "Resource has all keys"
+
+
+def test_get_employee_prices_hour():
+  prices = api.get_employee_prices_hour()
+  assert isinstance(prices, list), "Prices is a list"
+  for p in prices:
+    print(EMPLOYEE_PRICES_HOUR_KEYS - p.keys())
+    assert EMPLOYEE_PRICES_HOUR_KEYS.issubset(p.keys()), "Prices has all keys"
 
 
 def test_get_resource():
