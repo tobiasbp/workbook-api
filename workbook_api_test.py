@@ -412,6 +412,51 @@ INVOICE_TYPE_KEYS = set({
   'Id'
   })
 
+CREDITOR_KEYS = set({
+  'AccountNumber',
+  'AccountType',
+  #'Address1',
+  #'AllowCombinedPayment',
+  #'BankAccountNumber',
+  #'BankRegistrationNumber',
+  'Blocked',
+  #'City',
+  'CompanyId',
+  #'CountryId',
+  #'CreateEmployeeId',
+  #'CreditorActivityId',
+  #'CreditorAllowedZeroPricefactor',
+  #'CreditorPaymentDefinitionId',
+  #'CreditorPaymentMethodId',
+  #'CreditorPaymentTermId',
+  #'CreditorSendRemittanceAdvice',
+  #'CreditorVATId',
+  #'CurrencyID',
+  'DeliveryDebtorOnly',
+  #'EmployeeCreditor',
+  #'ExpenseEntryVoucherCurrencyMethod',
+  'Id',
+  #'Internal',
+  #'LanguageId',
+  'Name',
+  #'PayPropDisabled',
+  #'PayPropOmitCreditNote',
+  #'PayPropSkipAllIfCreditNote',
+  #'PayPropSkipAllIfDebitAmount',
+  #'PostingGroupId',
+  #'PrimarySupplyType',
+  #'PrintStatement',
+  #'PublicRegNoCheck',
+  #'PublicRegNoCheckType',
+  #'PublicRegistrationNumber',
+  #'ReportingGroupId',
+  'RequestStatus',
+  #'SupplierResourceID',
+  #'UpdateResourceId',
+  #'UseReminderHandling',
+  #'ZipCode'
+  })
+
 #FIXME: Test limited searches
 
 def test_get_employee_price_groups():
@@ -440,6 +485,14 @@ def test_get_costumers():
   assert isinstance(costumers, list), "Costumers is a list"
   for c in costumers:
     assert COSTUMER_KEYS.issubset(c.keys()), "Costumer has all keys"
+
+
+def test_get_creditors():
+  creditors = api.get_creditors()
+  assert isinstance(creditors, list), "Creditors is a list"
+  for c in creditors:
+    print(CREDITOR_KEYS - c.keys())
+    assert CREDITOR_KEYS.issubset(c.keys()), "Creditor has all keys"
 
 
 def test_get_departments():

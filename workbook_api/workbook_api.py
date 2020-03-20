@@ -79,6 +79,17 @@ class WorkbookAPI():
     return self._get(path, params={'Active': active})
 
 
+  def get_creditors(self, **kwargs):
+    '''
+    Get a list of companies
+    Params: active
+    '''
+
+    path = '/finance/accounts/creditors'
+
+    return self._get(path, params=kwargs)
+
+
   def get_departments(self, **kwargs):
     '''
     Get a list of departments
@@ -89,7 +100,6 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
-  #def get_debtors(self, **kwargs):
   def get_debtors(self, company_id=None, blocked=False, has_outstanding_amount=True):
     '''
     Get a list of debtors
