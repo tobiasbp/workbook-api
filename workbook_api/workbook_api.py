@@ -343,10 +343,25 @@ class WorkbookAPI():
     return self._get(path, params=params)
 
 
-  def get_employee_prices_hour(self):
-    '''
-    Get at list of employee prices hour
-    '''
+  def get_employee_prices_hour(self, **kwargs):
+    """Get at list of employee prices hour.
+    
+    Keyword arguments:
+    EmployeeId (Int): ID of Employee to get prices per hour for
+    ValidFrom (Date string): For when the price per hour is valid from
+    EmployeePosition (Int): To get employees for a specific position
+    PriceGroupId (Int): To get employees for a specific price group
+    ActiveEmployees (Bool): Show active/inactive employees. Show both if null/not provided
+    
+    Returns (Some of):
+    Id (Int): ID of prices
+    EmployeeId (Int): Id of employee
+    HoursCost (Float): ?
+    Profit (Float): ?
+    HoursSale (Float): ?
+    CurrencyId (Int): Id of currency
+    ICSale (Float): ?
+    """
     path = '/settings/employee/priceshour'
 
-    return self._get(path)
+    return self._get(path, params=kwargs)
