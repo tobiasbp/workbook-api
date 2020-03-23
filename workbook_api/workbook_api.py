@@ -173,8 +173,91 @@ class WorkbookAPI():
 
 
   def get_employees(self, **kwargs):
-    '''
-    Get a list of employees
+    '''Get a list of employees. Implements EmployeesRequest
+    
+    Keyword arguments:
+    CompanyId (Int): Id of company to get employees for	
+    Active (Bool): Only return active employees
+    UserAccountTypes (List of ints): A list of account types to return
+    
+    Returns:
+    Id (Int): ?
+    EmployeeName (String): ?
+    WeekendType (Int): ?
+    WeekStart (Int): ?,
+    CompanyId (Int): ?
+    ReportProfileId (Int): ?,
+    EmployeePosition (Int): ?,
+    PriceGroupId (Int): ?,
+    DisplayCurrencyId (Int): ?
+    DepartmentId (Int): ?
+    ExpiryDate (String) : "0001-01-01T00:00:00.000Z"
+    DomainLoginName (String): ?
+    Active (Bool): ?
+    Birthday (String): "0001-01-01T00:00:00.000Z"
+    DefaultActivityId (Int): ?
+    ManagerResourceId (Int): ?
+    TrafficManagerResourceId (Int): ?
+    TimeSheetApproverResourceId (Int): ?
+    SubstituteEmployeeId (Int): ?
+    EmploymentTypeId (int): ?
+    ReferenceKey (Int): ?
+    ExternalCode (String): ?
+    TimeRegistration (Bool): ?
+    TimeRegistrationReceiveMail (Bool): ?
+    Sex (Int): ?
+    DocumentFormatStandard (Int): ?
+    SystemSetting (String): ?
+    Localtion (Strring): ?
+    ReimbursementApproveManagerResourceId (Int): ?
+    MailAlias (String): ?
+    EmailBodyFormatType (Int):
+    ExternalCalenderSync (Int): ?
+    NewbizzResourceAccess (Bool): ?
+    FlexProfileId (Int): ?
+    AmountApproveVoucherJob (Int): ?
+    AmountApproveVoucherNonJob (Int): ?
+    AmountApproveRegulation (Int): ?
+    AmountApproveWriteOff (Int): ?
+    SystemLogOn (Bool): ?
+    SystemLogOnTime (String): "0001-01-01T00:00:00.000Z"
+    SystemLogOffTime (String): "0001-01-01T00:00:00.000Z"
+    CloseDownSystem (Bool): ?
+    EmployeeAccessProfileId (Int): ?
+    DriveRegistrationNumberRefund (Bool): ?
+    ExternalNumber (Int): ?
+    UpdateResourceId (Int): ?
+    UpdateDate (String): "0001-01-01T00:00:00.000Z"
+    UpdateType (Int): ?
+    AllowVendorInvoiceQuickRegistration (Bool): ?
+    AllowVATEdit (Bool): ?
+    FlexDisabled (Bool): ?
+    AllowDebtorEdit (Bool): ?
+    AllowCreditorEdit (Bool): ?
+    AllowFinanceAccountEdit (Bool): ?
+    ExchangeSyncStatus (Int): ?
+    ExchangeSyncMethod (Int): ?
+    ExchangeMailStatus (Int): ?
+    ExchangeActiveFolder (String): ?
+    BonusStandardShare (Int): ?
+    ExchangeSyncFrequency (Int): ?
+    LocationStatus (Int): ?
+    FormattingLCID (Int): ?
+    UDC1 (String): ?
+    UDC2 (String): ?
+    UDC3 (String): ?
+    UDC4 (String): ?
+    UDC5 (String): ?
+    FollowUpRefresh (Int)" ?
+    AllowExpenseEntry (Bool): ?
+    HolidayCalendarId (Int): ?
+    WorkDayAverageMethod (Int): ?
+    OfficeId (Int): 0
+    FullClientAccess (Bool): ?
+    AllowCreateTags (Bool): ?
+    AllowCreateSkills (Bool): ?
+    AllowSaveNewJobTemplates (Bool): ?
+    PermanentlyDisabled (Bool): ?
     '''
 
     path = '/resource/employees'
@@ -344,7 +427,8 @@ class WorkbookAPI():
 
 
   def get_employee_prices_hour(self, **kwargs):
-    """Get at list of employee prices hour.
+    """Get at list of employee prices hour. Employees can have more
+    than one entry, because prices can change (Be added) over time.
     
     Keyword arguments:
     EmployeeId (Int): ID of Employee to get prices per hour for
