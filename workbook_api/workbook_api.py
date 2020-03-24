@@ -90,7 +90,7 @@ class WorkbookAPI():
 
     return self._get(path, params={'Active': active})
 
-  def currency_convert(self, **kwargs):
+  def currency_convert(self, **kwargs) -> "Float":
     '''Convert an ammount from one currency to another.
     Either CurrencyTableId, CompanyId or JobId MUST be supplied!
     Returns the converted amount as a float
@@ -122,7 +122,7 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
-  def get_currencies(self, reporting_currency=True, including_blocked=False):
+  def get_currencies(self, reporting_currency:"Bool"=True, including_blocked:"Bool"=False) -> "List":
     '''
     Get a list of currencies
     Implements: CurrenciesRequest
