@@ -32,11 +32,10 @@ class WorkbookAPI():
 
 
   def _get(self, path, params = {}):
-    """
-    Args:
+    '''Args:
       path: The string added to the base URL
       params: key,value pairs to send in URL
-    """
+    '''
     assert path[0] == '/', "Path must begin with slash"
     assert isinstance(path, str), "Path must be a string"
 
@@ -90,6 +89,25 @@ class WorkbookAPI():
     path = '/core/resourcecompany'
 
     return self._get(path, params={'Active': active})
+
+  def currency_convert(self, **kwargs):
+    '''Convert an ammount from one currency to another.
+    Either CurrencyTableId, CompanyId or JobId MUST be supplied!
+    Returns the converted amount as a float
+
+    Keyword arguments:
+    Amount (Float): The amount to convert
+    FromCurrencyId (Int): The ID of the currency of the amount to convert
+    ToCurrencyId (Int): The ID of the currency to convert to
+    PerDate (DateTime string): The date to use for currency conversion. Defaults to today if omitted.
+    CurrencyTableId (Int): The currency table to get the exchange rate from. 
+    CompanyId (Int): The ID of the company to get the exchange rate from (uses the currency table of the company).
+    JobId (Int): The ID of the job to get the exchange rate from (uses the currency table of the company of the job)
+    '''
+
+    path = '/core/currency/convert'
+
+    return self._get(path, params=kwargs)
 
 
   def get_creditors(self, **kwargs):
