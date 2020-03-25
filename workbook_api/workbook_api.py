@@ -337,6 +337,30 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
+  def get_time_entries(self, **kwargs):
+    '''
+    Get a list of time entries
+    Implements: RawTimeEntriesRequest
+    
+    Keyword arguments:
+    ResourceId (Int): Resource id, fallback to current if nothing is set.
+    Start (String): Start date
+    End (String): End date
+    TaskId (Int): Task Id
+    JobId(Int): Job Id
+    ApprovalStatus (Int): Approval Status
+    JournalNumber (Int): Journal Number
+    HasTimeRegistration (Bool): Has Time Registration
+    SequenceNumber (List)(Int): Sequence Number
+    '''
+
+    path = '/personalexpense/timeentries/raw'
+
+    return self._get(path, params=kwargs)
+
+
+
+
   def get_expense_entries(self, **kwargs):
     '''
     Get at list of price quotes
