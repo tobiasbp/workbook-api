@@ -97,7 +97,7 @@ DEPARTMENT_KEYS = set({
   'CompanyId',
   'Id',
   'Name',
-  'ResponsibleId'
+  #'ResponsibleId'
   })
 
 DEBTOR_BALANCE_KEYS = set({
@@ -155,12 +155,12 @@ DEBTOR_KEYS = set({
   #'PhoneNumber',
   'PostingGroupId',
   'PrintStatement',
-  'PublicRegNoCheck',
+  #'PublicRegNoCheck',
   'PublicRegNoCheckType',
   #'PublicRegistrationNumber',
   #'ReportingGroupId',
   'RequestStatus',
-  'UpdateResourceId',
+  #'UpdateResourceId',
   'UseReminderHandling',
   #'ZipCode'
   })
@@ -248,9 +248,9 @@ JOB_TYPE_KEYS = set({
   'Id',
   'Name',
   'RetainerJob',
-  'UpdateDate',
+  #'UpdateDate',
   'UpdatePriceQuote',
-  'UpdateResourceId'
+  #'UpdateResourceId'
   })
 
 EMPLOYEE_KEYS = set({
@@ -287,7 +287,7 @@ EMPLOYEE_KEYS = set({
   'PermanentlyDisabled',
   'ReimbursementApproveManagerResourceId',
   #'Sex',
-  'SubstituteEmployeeId',
+  #'SubstituteEmployeeId',
   'SystemLogOn',
   'SystemSetting',
   'TimeRegistration',
@@ -349,7 +349,7 @@ EXPENSE_ENTRY_KEYS = set([
   'ExpenseEntryTypeId',
   'Id',
   'IsApproved',
-  'LocationId',
+  #'LocationId',
   #'ReceiptFile',
   'ResourceId',
   #'TaxManualEdited',
@@ -370,7 +370,7 @@ EMPLOYEE_PRICES_HOUR_KEYS = set({
   'CurrencyId',
   'EmployeeId',
   #'HoursCost',
-  'HoursSale',
+  #'HoursSale',
   'Id',
   'Profit',
   'ValidFrom'
@@ -415,7 +415,7 @@ INVOICE_KEYS = set({
   #'PrintDate',
   #'PrintResourceId',
   'ReportLayoutId',
-  'ReportWatermarkId',
+  #'ReportWatermarkId',
   'ResponsibleResourceId',
   'ReverseCharge',
   'ShowCurrency',
@@ -535,7 +535,74 @@ CREDITOR_KEYS_OLD = set({
   #'ZipCode'
   })
 
+TIME_ENTRY_KEYS = set({
+    'ActivityId',
+    'ApprovalStatus',
+    'Billable',
+    'Correction',
+    'Cost',
+    'CostCurrencyAmount',
+    'CostCurrencyId',
+    'CostMethod',
+    'CreateDate',
+    'CreateResourceId',
+    'DeletedMarked',
+    'DescriptionRequired',
+    'HoursMoved',
+    'Id',
+    'JobId',
+    'JournalNumber',
+    'PostDate',
+    'PricelistId',
+    'Public',
+    'RegistrationDate',
+    'ResourceId',
+    'Sale',
+    'SaleCurrencyAmount',
+    'SaleCurrencyId',
+    'SequenceNumber',
+    'TariffAdditionalPercentCost',
+    'TariffAdditionalPercentIcSale',
+    'TariffAdditionalPercentSale',
+    'UpdateDate',
+    'UpdateResourceId',
+    'UpdateType'
+    })
+
 #FIXME: Test limited searches
+
+def test_get_time_entries():
+    # Random active job
+    j = random.choice(api.get_jobs(Status=[1]))
+    # Get entries for random job
+    entries = api.get_time_entries(JobId=j['Id'])
+    assert isinstance(entries, list), "Time entries is a list"
+    for e in entries:
+        assert TIME_ENTRY_KEYS.issubset(e.keys()), "Time entry has all keys"
+
+def test_currency_convert():
+    currencies = api.get_currencies()
+    companies = api.get_companies()
+    cur1_id = currencies[0]['Id']
+    cur2_id = currencies[-1]['Id']
+    comp_id = random.choice(companies)['Id']
+    amount = random.random()
+    r = api.currency_convert(
+        Amount=amount,
+        FromCurrencyId=cur1_id,
+        ToCurrencyId=cur2_id,
+        CompanyId=comp_id
+        )
+    assert isinstance(r, float), "Converted amount is a float"
+    # Convert to same currency
+    r = api.currency_convert(
+        Amount=amount,
+        FromCurrencyId=cur1_id,
+        ToCurrencyId=cur1_id,
+        CompanyId=comp_id
+        )
+    assert r == amount, "Convert to same currency is same amount"
+
 
 def test_get_employee_price_groups():
   employee_price_groups = api.get_employee_price_groups()
@@ -547,7 +614,7 @@ def test_get_employee_positions():
   employee_positions = api.get_employee_positions()
   assert isinstance(employee_positions, list), "Employee positions is a list"
   for p in employee_positions:
-    print(EMPLOYEE_POSITION_KEYS - p.keys())
+    #print(EMPLOYEE_POSITION_KEYS - p.keys())
     assert EMPLOYEE_POSITION_KEYS.issubset(p.keys()), "Employee positions entry has all keys"
 
 
@@ -555,6 +622,7 @@ def test_get_expense_entries():
   expense_entries = api.get_expense_entries()
   assert isinstance(expense_entries, list), "Expense entries is a list"
   for e in expense_entries:
+    #print(EXPENSE_ENTRY_KEYS - e.keys())
     assert EXPENSE_ENTRY_KEYS.issubset(e.keys()), "Expense entry has all keys"
 
 
@@ -590,6 +658,7 @@ def test_get_departments():
   departments = api.get_departments()
   assert isinstance(departments, list), "Departments is a list"
   for d in departments:
+    print(DEPARTMENT_KEYS - d.keys())
     assert DEPARTMENT_KEYS.issubset(d.keys()), "Department has all keys"
 
 
@@ -597,6 +666,7 @@ def test_get_debtors():
   debtors = api.get_debtors()
   assert isinstance(debtors, list), "Debtors is a list"
   for d in debtors:
+    print(DEBTOR_KEYS - d.keys())
     assert DEBTOR_KEYS.issubset(d.keys()), "Debtor has all keys"
 
 
@@ -619,7 +689,6 @@ def test_get_invoice_type():
   invoice_types = api.get_invoice_types()
   assert isinstance(invoice_types, list), "Invoice types is a list"
   for i in invoice_types:
-    print(INVOICE_TYPE_KEYS - i.keys())
     assert INVOICE_TYPE_KEYS.issubset(i.keys()), "Invoice type has all keys"
 
 
@@ -645,12 +714,14 @@ def test_get_job_types():
   job_types = api.get_job_types()
   assert isinstance(job_types, list), "Job types is a list"
   for jt in job_types:
+    print(JOB_TYPE_KEYS - jt.keys())
     assert JOB_TYPE_KEYS.issubset(jt.keys()), "Job type has all keys"
 
 def test_get_employees():
   employees = api.get_employees()
   assert isinstance(employees, list), "Employees is a list"
   for e in employees:
+    #print(EMPLOYEE_KEYS - e.keys())
     assert EMPLOYEE_KEYS.issubset(e.keys()), "Employee has all keys"
 
 

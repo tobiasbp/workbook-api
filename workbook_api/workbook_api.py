@@ -32,11 +32,10 @@ class WorkbookAPI():
 
 
   def _get(self, path, params = {}):
-    """
-    Args:
+    '''Args:
       path: The string added to the base URL
       params: key,value pairs to send in URL
-    """
+    '''
     assert path[0] == '/', "Path must begin with slash"
     assert isinstance(path, str), "Path must be a string"
 
@@ -91,6 +90,25 @@ class WorkbookAPI():
 
     return self._get(path, params={'Active': active})
 
+  def currency_convert(self, **kwargs) -> "Float":
+    '''Convert an ammount from one currency to another.
+    Either CurrencyTableId, CompanyId or JobId MUST be supplied!
+    Returns the converted amount as a float
+
+    Keyword arguments:
+    Amount (Float): The amount to convert
+    FromCurrencyId (Int): The ID of the currency of the amount to convert
+    ToCurrencyId (Int): The ID of the currency to convert to
+    PerDate (DateTime string): The date to use for currency conversion. Defaults to today if omitted.
+    CurrencyTableId (Int): The currency table to get the exchange rate from. 
+    CompanyId (Int): The ID of the company to get the exchange rate from (uses the currency table of the company).
+    JobId (Int): The ID of the job to get the exchange rate from (uses the currency table of the company of the job)
+    '''
+
+    path = '/core/currency/convert'
+
+    return self._get(path, params=kwargs)
+
 
   def get_creditors(self, **kwargs):
     '''
@@ -104,7 +122,7 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
-  def get_currencies(self, reporting_currency=True, including_blocked=False):
+  def get_currencies(self, reporting_currency:"Bool"=True, including_blocked:"Bool"=False) -> "List":
     '''
     Get a list of currencies
     Implements: CurrenciesRequest
@@ -400,6 +418,30 @@ class WorkbookAPI():
     path = '/resource/{}'.format(kwargs['Id'])
 
     return self._get(path, params=kwargs)
+
+
+  def get_time_entries(self, **kwargs):
+    '''
+    Get a list of time entries
+    Implements: RawTimeEntriesRequest
+    
+    Keyword arguments:
+    ResourceId (Int): Resource id, fallback to current if nothing is set.
+    Start (String): Start date
+    End (String): End date
+    TaskId (Int): Task Id
+    JobId(Int): Job Id
+    ApprovalStatus (Int): Approval Status
+    JournalNumber (Int): Journal Number
+    HasTimeRegistration (Bool): Has Time Registration
+    SequenceNumber (List)(Int): Sequence Number
+    '''
+
+    path = '/personalexpense/timeentries/raw'
+
+    return self._get(path, params=kwargs)
+
+
 
 
   def get_expense_entries(self, **kwargs):
