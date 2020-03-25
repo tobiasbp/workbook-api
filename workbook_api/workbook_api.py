@@ -341,10 +341,24 @@ class WorkbookAPI():
 
 
   def get_jobs(self, **kwargs):
+    '''Returns a list of jobs.
+
+    Keyword arguments:
+    Status (List of ints): FIlter on status ids of the jobs.
+    TicketEnabled (Bool): Filter on whether tickets is enabled on that job or not.
+    StartDate (String): Filter on job start date.
+    EndDate (String): Filter on job end date.
+    CreateDate (String): Filter on job create date.
+    ExpenditureAccountMethodIds: (List of ints): Filter on expenditures account method ids selected on the jobs.
+    JobIds (List of ints): Filter on specific job ids. Useful when checking if the job matches the filter.
+    VoucherRegistrationAllowed (Bool): Filter on voucher registration allowed on job.
+    CompanyId (Int): Filter on job company id.
+    ProjectId (Int): Filter on job project id.
+    PipelineIds (List of ints): Filter on specific pipeline ids
+    CustomerTypes (List of int): Filter on customer types
     '''
-    Params:
-      Status: Jobs returned must match these statii
-    '''
+    # FIXME: Add path argument ResourceID or make get_job(id)
+
     if 'Status' in kwargs:
       assert isinstance(kwargs['Status'], list), "Status must be a list"
 
