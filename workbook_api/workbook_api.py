@@ -181,7 +181,7 @@ class WorkbookAPI():
     UserAccountTypes (List of ints): A list of account types to return
     
     Returns:
-    Id (Int): ?
+    Id (Int): Id of this employee. Matches a resource Id for same person
     EmployeeName (String): ?
     WeekendType (Int): ?
     WeekStart (Int): ?,
@@ -208,7 +208,7 @@ class WorkbookAPI():
     Sex (Int): ?
     DocumentFormatStandard (Int): ?
     SystemSetting (String): ?
-    Localtion (Strring): ?
+    Localtion (String): ?
     ReimbursementApproveManagerResourceId (Int): ?
     MailAlias (String): ?
     EmailBodyFormatType (Int):

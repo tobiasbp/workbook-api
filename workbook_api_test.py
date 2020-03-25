@@ -686,7 +686,14 @@ def test_get_employee_prices_hour():
   for p in prices:
     print(EMPLOYEE_PRICES_HOUR_KEYS - p.keys())
     assert EMPLOYEE_PRICES_HOUR_KEYS.issubset(p.keys()), "Prices has all keys"
-
+  # Test filter
+  random_price = random.choice(prices)
+  prices = api.get_employee_prices_hour(PriceGroupId=random_price['EmployeeId'])
+  for p in prices:
+    print(EMPLOYEE_PRICES_HOUR_KEYS - p.keys())
+    assert EMPLOYEE_PRICES_HOUR_KEYS.issubset(p.keys()), "Prices has all keys"
+    assert p['EmployeeId'] == random_price['EmployeeId']
+  
 
 def test_get_resource():
   # Get a random resource
