@@ -535,7 +535,50 @@ CREDITOR_KEYS_OLD = set({
   #'ZipCode'
   })
 
+TIME_ENTRY_KEYS = set({
+    'ActivityId',
+    'ApprovalStatus',
+    'Billable',
+    'Correction',
+    'Cost',
+    'CostCurrencyAmount',
+    'CostCurrencyId',
+    'CostMethod',
+    'CreateDate',
+    'CreateResourceId',
+    'DeletedMarked',
+    'DescriptionRequired',
+    'HoursMoved',
+    'Id',
+    'JobId',
+    'JournalNumber',
+    'PostDate',
+    'PricelistId',
+    'Public',
+    'RegistrationDate',
+    'ResourceId',
+    'Sale',
+    'SaleCurrencyAmount',
+    'SaleCurrencyId',
+    'SequenceNumber',
+    'TariffAdditionalPercentCost',
+    'TariffAdditionalPercentIcSale',
+    'TariffAdditionalPercentSale',
+    'UpdateDate',
+    'UpdateResourceId',
+    'UpdateType'
+    })
+
 #FIXME: Test limited searches
+
+def test_get_time_entries():
+    # Random active job
+    j = random.choice(api.get_jobs(Status=[1]))
+    # Get entries for random job
+    entries = api.get_time_entries(JobId=j['Id'])
+    assert isinstance(entries, list), "Time entries is a list"
+    for e in entries:
+        assert TIME_ENTRY_KEYS.issubset(e.keys()), "Time entry has all keys"
 
 def test_currency_convert():
     currencies = api.get_currencies()
@@ -551,7 +594,7 @@ def test_currency_convert():
         CompanyId=comp_id
         )
     assert isinstance(r, float), "Converted amount is a float"
-    # Novert to same currency
+    # Convert to same currency
     r = api.currency_convert(
         Amount=amount,
         FromCurrencyId=cur1_id,
@@ -560,7 +603,6 @@ def test_currency_convert():
         )
     assert r == amount, "Convert to same currency is same amount"
 
-    pass
 
 def test_get_employee_price_groups():
   employee_price_groups = api.get_employee_price_groups()
