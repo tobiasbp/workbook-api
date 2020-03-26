@@ -64,6 +64,66 @@ class WorkbookAPI():
     return self._get(path, params={})
 
 
+  def get_capacity_profiles(self, ResourceId, AlwaysReturnProfile=True):
+    '''Get a list of capacity profile for a resource (Human)
+    Capcity is hours expected to work.
+    Implements: CapacityProfilesByResourceRequest
+
+    Keyword arguments:
+    ResourceIds (List<Int>): List of resource IDs
+    StartDate (String): The starting date to obtain capacities for
+    EndDate (String): The ending date to obtain capacities for
+    
+    A capacity profile dict (potentially) includes these keys:
+    "Id",
+    "ResourceId",
+    "HoursNormalMonday",
+    "HoursNormalTuesday",
+    "HoursNormalWednesday",
+    "HoursNormalThursday",
+    "HoursNormalFriday",
+    "HoursNormalSaturday",
+    "HoursNormalSunday",
+    "HoursFlexMonday",
+    "HoursFlexTuesday",
+    "HoursFlexWednesday",
+    "HoursFlexThursday",
+    "HoursFlexFriday",
+    "HoursFlexSaturday",
+    "HoursFlexSunday",
+    "HoursIdealMonday",
+    "HoursIdealTuesday",
+    "HoursIdealWednesday",
+    "HoursIdealThursday",
+    "HoursIdealFriday",
+    "HoursIdealSaturday",
+    "HoursIdealSunday",
+    "ValidFrom"
+    "OfficeHoursMondayStart",
+    "OfficeHoursMondayEnd",
+    "OfficeHoursTuesdayStart",
+    "OfficeHoursTuesdayEnd",
+    "OfficeHoursWednesdayStart",
+    "OfficeHoursWednesdayEnd"
+    "OfficeHoursThursdayStart",
+    "OfficeHoursThursdayEnd",
+    "OfficeHoursFridayStart",
+    "OfficeHoursFridayEnd",
+    "OfficeHoursSaturdayStart",
+    "OfficeHoursSaturdayEnd",
+    "OfficeHoursSundayStart",
+    "OfficeHoursSundayEnd"
+    '''
+
+    params = {
+      'AlwaysReturnProfile': AlwaysReturnProfile
+      }
+
+    path = '/resource/{}/capacity/profiles'.format(ResourceId)
+
+    return self._get(path, params=params)
+
+
 
   def get_costumers(self, costumer_id=None, **kwargs):
     '''

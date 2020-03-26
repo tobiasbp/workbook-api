@@ -33,6 +33,47 @@ PROJECT_KEYS = set({
   #'UpdateResourceId'
   })
 
+CAPACITY_PROFILE_KEYS = set({
+  "Id",
+  "ResourceId",
+  "HoursNormalMonday",
+  "HoursNormalTuesday",
+  "HoursNormalWednesday",
+  "HoursNormalThursday",
+  "HoursNormalFriday",
+  "HoursNormalSaturday",
+  "HoursNormalSunday",
+  "HoursFlexMonday",
+  "HoursFlexTuesday",
+  "HoursFlexWednesday",
+  "HoursFlexThursday",
+  "HoursFlexFriday",
+  "HoursFlexSaturday",
+  "HoursFlexSunday",
+  "HoursIdealMonday",
+  "HoursIdealTuesday",
+  "HoursIdealWednesday",
+  "HoursIdealThursday",
+  "HoursIdealFriday",
+  "HoursIdealSaturday",
+  "HoursIdealSunday",
+  "ValidFrom"
+  #"OfficeHoursMondayStart",
+  #"OfficeHoursMondayEnd",
+  #"OfficeHoursTuesdayStart",
+  #"OfficeHoursTuesdayEnd",
+  #"OfficeHoursWednesdayStart",
+  #"OfficeHoursWednesdayEnd"
+  #"OfficeHoursThursdayStart",
+  #"OfficeHoursThursdayEnd",
+  #"OfficeHoursFridayStart",
+  #"OfficeHoursFridayEnd",
+  #"OfficeHoursSaturdayStart",
+  #"OfficeHoursSaturdayEnd",
+  #"OfficeHoursSundayStart",
+  #"OfficeHoursSundayEnd"
+  })
+
 COMPANY_KEYS =set({
   'Active',
   'Id',
@@ -543,7 +584,7 @@ TIME_ENTRY_KEYS = set({
     'Cost',
     'CostCurrencyAmount',
     'CostCurrencyId',
-    'CostMethod',
+    #'CostMethod',
     'CreateDate',
     'CreateResourceId',
     'DeletedMarked',
@@ -561,15 +602,28 @@ TIME_ENTRY_KEYS = set({
     'SaleCurrencyAmount',
     'SaleCurrencyId',
     'SequenceNumber',
-    'TariffAdditionalPercentCost',
-    'TariffAdditionalPercentIcSale',
-    'TariffAdditionalPercentSale',
+    #'TariffAdditionalPercentCost',
+    #'TariffAdditionalPercentIcSale',
+    #'TariffAdditionalPercentSale',
     'UpdateDate',
     'UpdateResourceId',
     'UpdateType'
     })
 
 #FIXME: Test limited searches
+
+def test_get_capacity_profiles():
+    # Get a random employee
+    employee = random.choice(api.get_employees())
+    assert isinstance(employee, dict), "Employee is a dict"
+    # Get capacity profiles for random employee
+    profiles = api.get_capacity_profiles(employee['Id'])
+    assert isinstance(profiles, list), "Capacity profiles is a list"
+    assert len(profiles) > 0, "All employees have at least 1 capacity profile"
+    for p in profiles:
+        print(CAPACITY_PROFILE_KEYS - p.keys())
+        assert CAPACITY_PROFILE_KEYS.issubset(p.keys()), "Capacity profiles has all keys"
+
 
 def test_get_time_entries():
     # Random active job
@@ -578,6 +632,7 @@ def test_get_time_entries():
     entries = api.get_time_entries(JobId=j['Id'])
     assert isinstance(entries, list), "Time entries is a list"
     for e in entries:
+        print(TIME_ENTRY_KEYS - e.keys())
         assert TIME_ENTRY_KEYS.issubset(e.keys()), "Time entry has all keys"
 
 def test_currency_convert():
