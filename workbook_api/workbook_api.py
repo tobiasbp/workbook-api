@@ -496,7 +496,8 @@ class WorkbookAPI():
 
   def get_time_entries(self, **kwargs):
     '''
-    Get a list of time entries
+    Get a list of time entries covering work done
+    between Start and End
     Implements: RawTimeEntriesRequest
     
     Keyword arguments:
@@ -509,6 +510,77 @@ class WorkbookAPI():
     JournalNumber (Int): Journal Number
     HasTimeRegistration (Bool): Has Time Registration
     SequenceNumber (List)(Int): Sequence Number
+    
+    Returns (some of) these:
+    Id (Int),
+    ResourceId (Int),
+    JobId (Int),
+    TaskId (Int),
+    ActivityId (Int),
+    Hours (Float),
+    Description (String),
+    DescriptionRequired (Bool),
+    Cost (Float),
+    Sale (Float),
+    CostMethod (Int?),
+    SaleMethod (int?)
+    SequenceNumber (Int?),
+    JournalNumber (Int),
+    Correction (Int?),
+    CorrectionJob (Int?)
+    ,"CorrectionCost":0,
+    "CorrectionSale":0,
+    "SaleOriginal":0,
+    "EmployeeHolidayRecordId":0,
+    "PayrollJournalId":0,
+    "HoursMoved":0,
+    "ICSale":0,
+    "CorrectionNote":"String",
+    "CorrectionDate":"0001-01-01T00:00:00.000Z",
+    "CorrectionReferenceId":0,
+    "CorrectionOrgDate":"0001-01-01T00:00:00.000Z",
+    "Public":false,
+    "CorrectionResId":0,
+    "PartInvoiceRefInvId":0,
+    "PricelistId":0,
+    "CostCurrencyId":0,
+    "SaleCurrencyId":0,
+    "CostCurrencyAmount":0,
+    "SaleCurrencyAmount":0,
+    "ApprovalEmployeeResourceId":0,
+    "ApprovalEmployeeDate":"0001-01-01T00:00:00.000Z",
+    "ApprovalProjectManagerResourceId":0,
+    "ApprovalProjectManagerDate":"0001-01-01T00:00:00.000Z",
+    "ApprovalAdminResourceId":0,
+    "ApprovalAdminDate":"0001-01-01T00:00:00.000Z",
+    "ApprovalRejectResourceId":0,
+    "ApprovalRejectComment":"String",
+    "ApprovalRejectDate":"0001-01-01T00:00:00.000Z",
+    "ApprovalStatus":0,
+    "Billable":false,
+    "InternalDescription":"String",
+    "MaxPerEntry":0,
+    "MaxPerEntryCurrency":0,
+    "PriceAdjustmentID":0,
+    "PriceAdjustmentChangeDate":"0001-01-01T00:00:00.000Z",
+    "PriceAdjustmentSaleRate":0,
+    "PriceAdjustmentCostRate":0,
+    "SaleOriginAmount":0,
+    "CostOriginAmount":0,
+    "UpdateResourceId":0,
+    "UpdateComment":"String",
+    "UpdateDate":"0001-01-01T00:00:00.000Z",
+    "UpdateType":0,
+    "HasApprovedResourceInitals":"String",
+    "HasApprovedNotResourceInitals":"String",
+    "TariffId":0,
+    "TariffAdditionalPercentCost":0,
+    "TariffAdditionalPercentSale":0,
+    "TariffAdditionalPercentIcSale":0,
+    "Underposting":"0001-01-01T00:00:00.000Z",
+    "DeletedMarked":false,
+    "CreateDate":"0001-01-01T00:00:00.000Z",
+    "CreateResourceId":0
     '''
 
     path = '/personalexpense/timeentries/raw'
