@@ -610,7 +610,29 @@ TIME_ENTRY_KEYS = set({
     'UpdateType'
     })
 
+FINANCE_ACCOUNT_KEYS = set({
+    'AccountDescription',
+    'AccountNumber',
+    'AccountType',
+    'AllowVendorInvoice',
+    'Automatic',
+    'Blocked',
+    'CompanyId',
+    'DimensionNotAllowed',
+    'DimensionRequired',
+    'Id',
+    'LineNumber',
+    'ReportPageBreak'
+    })
+
 #FIXME: Test limited searches
+
+def test_get_finance_account():
+  accounts = api.get_finance_accounts()
+  assert isinstance(accounts, list), "Finance accounts entries is a list"
+  for a in accounts:
+    assert FINANCE_ACCOUNT_KEYS.issubset(a.keys()), "Finance account entry has all keys"
+
 
 def test_get_capacity_profiles():
     # Get a random employee

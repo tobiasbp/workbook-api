@@ -70,10 +70,8 @@ class WorkbookAPI():
     Implements: CapacityProfilesByResourceRequest
 
     Keyword arguments:
-    ResourceIds (List<Int>): List of resource IDs
-    StartDate (String): The starting date to obtain capacities for
-    EndDate (String): The ending date to obtain capacities for
-    
+    ResourceId (Int): Resource ID to get profiles for
+
     A capacity profile dict (potentially) includes these keys:
     "Id",
     "ResourceId",
@@ -174,6 +172,100 @@ class WorkbookAPI():
     '''
     Get a list of companies
     Implements: CreditorListsRequest
+    
+    Keyword arguments:
+    None
+    
+    Returns:
+    "Id":0
+    ,"AccountNumber":"String",
+    "CompanyId":0,
+    "AccountType":0,
+    "GroupId":0,
+    "Name":"String",
+    "Address1":"String",
+    "Address2":"String",
+    "Address3":"String",
+    "ZipCode":"String",
+    "City":"String",
+    "MainTelephone":"String",
+    "AccountContact":"String",
+    "ContactPhoneNumber":"String",
+    "Blocked":false,
+    "CountryId":0,"CountryStateId":0,
+    "CountryCountyId":0,
+    "LCID":0,
+    "CreditorPayTermId":0,
+    "CreditorVatId":0,
+    "CreditorActivityId":0,
+    "AccountGroupId":0,
+    "BankRegistrationNumber":"String",
+    "BankAccountNumber":"String",
+    "DebtorPayTermId":0,
+    "DebtorVatId":0,
+    "OurNumberAtAccount":"String",
+    "ReminderId":0,
+    "PublicRegistrationNumber":"String",
+    "EAN":"String",
+    "OurAccountNumber":"String",
+    "ConverterCode":0,
+    "CreditorIsEmployee":false,
+    "SwiftNumber":"String",
+    "IbanNumber":"String",
+    "Telefax":"String",
+    "Email":"String",
+    "DebtorPayModeId":0,
+    "CreditorPayModeId":0,
+    "CreditorPayMethodId":0,
+    "CreditorPayCreditorNumber":"String",
+    "CreditorOffAccountId":0,
+    "CreditorOffAccountAuto":false,
+    "PayCreditorNoteMethodId":0,
+    "WorkBookInfo":"String",
+    "IsMiscAccount":false,
+    "AllowCombinedPayment":false,
+    "TmpArpPayId":0,
+    "PayGroupId":0,
+    "PayPropDisabled":false,
+    "PayPropSkipAllIfCreditNote":false,
+    "PayPropSkipAllIfDebitAmount":false,
+    "PayPropOmitCreditNote":false,
+    "LastExportDate":"0001-01-01T00:00:00.000Z",
+    "Internal":false,
+    "PrimerySupplyType":0,
+    "UpdateResourceId":0,
+    "UpdateDate":"0001-01-01T00:00:00.000Z",
+    "UpdateType":0,
+    "InvoiceDeliveryType":0,
+    "PrintStatement":false,
+    "HoursCostPrice":0,
+    "BankId":0,
+    "UseReminderHandling":false,
+    "CreditorPayCodeDefinition":"String",
+    "PaymentCardIdentificationNumberSetup":0,
+    "SupplierResourceID":0,
+    "CurrencyId":0,
+    "AccrualOfInterestYearPercent":0,
+    "ReminderChargeAmount":0,
+    "SalesTaxCodeId":0,
+    "CreditorAllowedZeroPricefactor":false,
+    "DeliveryDebtorOnly":false,
+    "PublicRegistrationNumberCheck":0,
+    "EInvoiceCustomDefined":"String",
+    "Used":0,
+    "AccrualMonthsDefault":0,
+    "ExternalReference":"String",
+    "InvoicingEmail":"String",
+    "CreditInsuranceAmount":0,
+    "PublicRegistrationNumberCheckType":0,
+    "ExpenseEntryVoucherCurrencyMethod":0,
+    "PayModeId":0,
+    "PayMethodId":0,
+    "MethodDescription":"String",
+    "AccountId":0,
+    "GroupTitle":"String",
+    "RemainingAmountTotal":0,
+    "RemainingAmountDue":0
     '''
 
     #path = '/finance/accounts/creditors'
@@ -209,7 +301,8 @@ class WorkbookAPI():
 
   def get_debtors(self, company_id=None, blocked=False, has_outstanding_amount=True):
     '''
-    Get a list of debtors
+    Get a list of debtors.
+    Implements: DebtorsRequest
     Params:
       CompanyId: Int
       Blocked: Bool
@@ -354,6 +447,8 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
+
+
   def get_employee_positions(self):
     '''
     Get a employee positions
@@ -363,6 +458,31 @@ class WorkbookAPI():
     path = '/resource/employee/positions'
 
     return self._get(path, params={})
+
+
+  def get_finance_accounts(self):
+    '''
+    Get finance accounts
+    Wraps: FinanceAccountsRequest
+    
+    Returns:
+    AccountDescription,
+    AccountNumber,
+    AccountType,
+    AllowVendorInvoice,
+    Automatic,
+    Blocked,
+    CompanyId,
+    DimensionNotAllowed,
+    DimensionRequired,
+    Id,
+    LineNumber,
+    ReportPageBreak'
+    '''
+
+    path = "/finance/accounts"
+
+    return self._get(path)
 
 
   def get_invoices(self, status=[], job_id=None, customer_id=None):
