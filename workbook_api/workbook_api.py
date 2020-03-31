@@ -460,6 +460,31 @@ class WorkbookAPI():
     return self._get(path, params={})
 
 
+  def get_finance_account(self, account_id):
+    '''
+    Get a single finance account
+    Wraps: FinanceAccountRequest
+    
+    Returns:
+    AccountDescription,
+    AccountNumber,
+    AccountType,
+    AllowVendorInvoice,
+    Automatic,
+    Blocked,
+    CompanyId,
+    DimensionNotAllowed,
+    DimensionRequired,
+    Id,
+    LineNumber,
+    ReportPageBreak'
+    '''
+
+    path = "/finance/account/{}".format(account_id)
+
+    return self._get(path)
+
+
   def get_finance_accounts(self):
     '''
     Get finance accounts
