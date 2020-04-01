@@ -447,6 +447,24 @@ class WorkbookAPI():
     return self._get(path, params=kwargs)
 
 
+  def get_finance_account_balance(self, CompanyId, AccountId):
+    '''
+    Get a list of balance history for an account
+    Wraps: FinanceAccountPeriodBalanceRequest
+
+    Required keywords:
+    CompanyId (int): Filter on company id.
+    AccountId (int): Filter on Account id.
+    '''
+
+    params = {
+      "CompanyId": CompanyId,
+      "AccountId": AccountId
+      }
+
+    path = '/finance/account/period/balance'
+
+    return self._get(path, params=params)
 
 
   def get_employee_positions(self):
@@ -485,11 +503,21 @@ class WorkbookAPI():
     return self._get(path)
 
 
-  def get_finance_accounts(self):
+  def get_finance_accounts(self, **kwargs):
     '''
     Get finance accounts
     Wraps: FinanceAccountsRequest
-    
+
+    Keyword arguments:
+    CompanyId (Int): Filter on company id
+    Companies(int[]): Filter on multiple companies
+    TypeIds (int[]): 3 = Virtual summing account? 0,1,2,3 exists. 
+    AllowVendorInvoice (Bool): ?
+    Automatic (Bool): Filter on automatic
+    IncludeActive (Bool): Include active (non-blocked) accounts or not. Defaults to true
+    IncludeBlocked (Bool): Include blocked accounts or not. Defaults to false
+    ExcludedAccountIds (int[]): The IDs of FinanceAccounts that should not be returned by the query
+
     Returns:
     AccountDescription,
     AccountNumber,
@@ -507,7 +535,7 @@ class WorkbookAPI():
 
     path = "/finance/accounts"
 
-    return self._get(path)
+    return self._get(path, params=kwargs)
 
 
   def get_invoices(self, status=[], job_id=None, customer_id=None):

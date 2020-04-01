@@ -625,6 +625,18 @@ FINANCE_ACCOUNT_KEYS = set({
     'ReportPageBreak'
     })
 
+FINANCE_ACCOUNT_BALANCE_KEYS = set({
+    'AccountId',
+    'AmountBeginning',
+    #'AmountEnd',
+    'EndDate',
+    'FinancialPeriodId',
+    'FinancialYearNumber',
+    'Id',
+    'YearEnd',
+    'YearStart'
+    })
+
 #FIXME: Test limited searches
 
 def test_get_finance_account():
@@ -632,11 +644,25 @@ def test_get_finance_account():
   assert isinstance(accounts, list), "Finance accounts entries is a list"
   for a in accounts:
     assert FINANCE_ACCOUNT_KEYS.issubset(a.keys()), "Finance account entry has all keys"
-  #account = random.choice(accounts)
+  account = random.choice(accounts)
   account = api.get_finance_account(
     account_id=random.choice(accounts)['Id'])
   assert FINANCE_ACCOUNT_KEYS.issubset(account.keys()), "Finance account has all keys"
-  
+
+
+def test_get_finance_account_balance():
+  # Random finance account of type "summing" (It must have records)
+  account = random.choice((api.get_finance_accounts(TypeIds=[3])))
+  # Get a list of a balances for an account
+  balance_list = api.get_finance_account_balance(
+    CompanyId=account['CompanyId'],
+    AccountId=account['Id']
+    )
+  assert isinstance(balance_list, list), "Balance list entries is a list"
+  for b in balance_list:
+    #print(FINANCE_ACCOUNT_BALANCE_KEYS - b.keys())
+    assert FINANCE_ACCOUNT_BALANCE_KEYS.issubset(b.keys()), "Balance entry has all keys"
+
 
 def test_get_capacity_profiles():
     # Get a random employee
@@ -762,7 +788,6 @@ def test_get_invoices():
   invoices = api.get_invoices()
   assert isinstance(invoices, list), "Invoices is a list"
   for i in invoices:
-    print(INVOICE_KEYS - i.keys())
     assert INVOICE_KEYS.issubset(i.keys()), "Invoice has all keys"
 
 
