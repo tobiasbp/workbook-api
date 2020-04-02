@@ -140,13 +140,232 @@ class WorkbookAPI():
 
   def get_companies(self, active=True):
     '''
-    Get a list of companies
+    Get a list of companies. For full data on a company, you
+    need to call get_company(company_id)
+    Wraps: CompaniesRequest
     Params: active
+
+    Returns:
+    Active (Bool): Is company active?
+    Id (Int): Unique ID of company
+    Name (String): Name of company
     '''
+    # FIXME Add suppot for all keywords with kwargs
 
     path = '/core/resourcecompany'
 
     return self._get(path, params={'Active': active})
+
+
+  def get_company(self, CompanyId):
+    '''
+    Get info on a single company
+    Wraps: CompanyRequest
+    Params: CompanyId
+
+    Note: Both ID & Id are used in filed names!
+
+    Returns (Some of):
+    NAME
+    Id
+    Name
+    Initials
+    ResponsibleEmployeeID
+    AddressText
+    EmailDomain
+    PublicRegNo
+    EAN
+    EIN
+    ExternalReferenceNumber
+    ExternalReferenceCode
+    DefaultJobActivityID
+    CurrencyID
+    ManualCLoseJobMaxExternalCost
+    ManualCLoseJobMaxInternalCost
+    TimeregAllowEditAfterXDays
+    JobNumberBegin
+    JobNumberEnd
+    Active
+    AllowEditDebtorLabelOnInvoice
+    CloseJobOnFinalInvoice
+    CloseJobOnCreditNote
+    InvoiceDateMaxDaysForward
+    InvoiceDateMaxDaysBackward
+    InvoiceNumberBegin
+    InvoiceNumberEnd
+    InvoiceReportGraphicsId
+    AllowZeroInvoice
+    InvoiceAllowEditTimeSale
+    InvoiceAllowEditExtExpFactor
+    InvoiceTypeCreditPayTermId
+    InvoiceApprovalMaxCostWriteDown
+    InvoiceApprovalMaxCostWriteUp
+    DebtorInvoiceDraftArchiveUNC
+    DebtorInvoiceFinalArchiveUNC
+    InvoiceCustAccountableApprType
+    PurchaseOrderGraphicsId
+    AdministrationFeeMaterialID
+    AdministrationFeeMaterialType
+    CurrencyTableID
+    FinanceAccountID
+    PayTermId
+    ActVatId
+    ArpJournalTypeID
+    FtpHostAddress
+    FtpHostUserID
+    FtpHostPW
+    WbeJournHdrId
+    ModuleProjectIsActive
+    ModuleFinanceIsActive
+    ICDepId
+    CreditorPaymentJournalTypeID
+    PayCrNoteMethodId
+    DebtorStandardArpVatId
+    DebtorStandardPaymodeId
+    FinanceIntegrationPostSummation
+    DepartmentId
+    FinanceSequenceIDJobClosures
+    JournalTypeIDVouchers
+    JournalTypeIDTime
+    JournalTypeIDMaterials
+    JournalTypeIDAdjustments
+    JournalTypeIDInvoices
+    JournalTypeIDInterCompany
+    JournalTypeIDJobClosures
+    JournalTypeIDPeriodClosures
+    JournalTypeIDBankReconciliation
+    JournalTypeIDInterestNotes
+    JournalTypeIDCrossCompanyVouchers
+    AllowProjectPostingOnManualAccounts
+    EquityAccountID
+    OperatingAccountID
+    ReguUpManualNonJobResp
+    ReguDownManualNonJobResp
+    AccountNumberMaskFinance
+    AccountNumberMaskAR
+    AccountNumberMaskAP
+    BookJobClosureChkTimereg
+    BookJobClosureChkMatreg
+    BookJobClosureChkVouch
+    BookJobClosureSalesInvoices
+    QuoteReportGraphicsId
+    QuoteAllowChangeTimeSale
+    QuoteAllowChangeExtExpFactor
+    QuoteMaxUpwardsAdjustment
+    QuoteMaxDownwardsAdjustment
+    QuoteMaxContributionRatio
+    QuoteMinContributionRatio
+    QuoteTitle
+    QuoteIntroduction
+    QuoteComment
+    QuoteBlockIfDeviation
+    QuoteCustAccountableApprType
+    PartialInvoicePostingMethod
+    AllowInterCompanyTimeEntryDefault
+    FinanceSequenceIDMoveJobVouchers
+    FinanceSequenceIDDisbursementVouchers
+    FinanceSequenceIDMileageVouchers
+    FinanceSequenceIDSubsistenceAllowanceVouchers
+    FinanceSequenceIDVouchers
+    FinanceSequenceIDInterestNotes
+    FlexStartDate
+    FinanceSequenceIDInterCompanyVouchers
+    FinanceSequenceIDInterCompanyCreditorInvoices
+    FinanceSequenceIDInterCompanyExpenseEntryVouchers
+    ActivityVATIDFinance
+    InterimAccountIdCreditor
+    InterimAccountIdDebtor
+    InterCompanySettlementEnableDefault
+    CreateNewCopySettingsEmployeeId
+    CreateNewCopySettingsCustomerId
+    CreateNewCopySettingsDebtorId
+    CreateNewCopySettingsCreditorId
+    VendInvQuickRegAccId1
+    VendInvQuickRegAccId2
+    VouchRegFolderPath
+    VoucherFileArchivePathStorageProviderId
+    VoucherFileArchivePath
+    VoucherFileArchiveUNC
+    VouchToolEnabled
+    VouchToolFolderPath
+    VouchToolSplitFiles
+    VouchErrorMail
+    VouchMailServerType
+    VouchMailServerName
+    VouchMailAccount
+    VouchMailPassword
+    VouchToolFolderPath2
+    VouchMailServerType2
+    VouchMailServerName2
+    VouchMailAccount2
+    VouchMailPassword2
+    UpdateResId
+    UpdateDate
+    UpdateType
+    JobPriceDefaultReportLayoutId
+    JobRequisitionDefaultReportLayoutId
+    MileageCost
+    MileageSale
+    MileageActivityId
+    MileageDescription
+    MileageDistanceUnit
+    MileageExpenditureAccountID
+    MileageEqualisationAccountID
+    WeekendType
+    WeekStart
+    DefaultJobFolderId
+    InvoiceNumberPrefix
+    InvoiceNumberSuffix
+    PostInvoicesOnSalesDate
+    InvoiceNumberMinimumDigits
+    InvoiceNumberResetInterval
+    CompanyType
+    SalesTaxMethodID
+    ExpenseEntryReceiptFilePath
+    EmployeeCreditorTemplateArpAccId
+    DebtorIntrestAccId
+    CountryId
+    PurchaseOrderArpAccId
+    AccountNumberMaskEmployeeCreditor
+    BookJobClosureChkMileage
+    BookJobClosureChkExpense
+    VoucherHotFolderFilePath
+    InvoiceNumberStart
+    HolidayCalendarId
+    AccountingOperationsResponsibleId
+    InterimAccountIdPrivateWithdrawals
+    WorkDayAverageMethod
+    UnrealizedCurrencyGainsAccId
+    UnrealizedCurrencyLossesAccId
+    JournalTypeIDCurrencyRevaluations
+    FinanceSequenceIDCurrencyRevaluations
+    CurrencyRevaluationBalanceAccIdDebit
+    CurrencyRevaluationBalanceAccIdCredit
+    SalesInvoiceAccrualBalanceAccId
+    SalesInvoiceAccrualOperationAccId
+    DefaultAccrualAccountId
+    CreditInvoiceNumberPrefix
+    CreditInvoiceNumberSuffix
+    CreditInvoiceNumberMinimumDigits
+    CreditInvoiceNumberResetInterval
+    DeliveryInvoiceNumberPrefix
+    DeliveryInvoiceNumberSuffix
+    DeliveryInvoiceNumberMinimumDigits
+    DeliveryInvoiceNumberResetInterval
+    CreditInvoiceNumberBegin
+    CreditInvoiceNumberEnd
+    DeliveryInvoiceNumberBegin
+    DeliveryInvoiceNumberEnd
+    CopyPrintSettingsNewPrice
+    CrossCompanyExpenseEntryPlaceholderAccountReceivablePayableVatId
+    CrossCompanyExpenseEntryPlaceholderSalesTaxId
+    MaterialCalculationAllowChangeSaleHours
+    '''
+
+    path = '/core/company/{}'.format(CompanyId)
+
+    return self._get(path)
+
 
   def currency_convert(self, **kwargs) -> "Float":
     '''Convert an ammount from one currency to another.
